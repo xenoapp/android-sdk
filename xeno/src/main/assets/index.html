@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>.slaask-button { display: none !important; }</style>
+
+        <script>
+            document.addEventListener('xeno.ready', function()  {
+                window._xeno.show();
+                document.getElementById('ios-lds-dual-ring').remove()
+            }, false);
+
+            window._xenoSettings = { }
+        </script>
+    </head>
+    <body>
+        <style>
+            .lds-dual-ring {
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+            }
+            .lds-dual-ring:after {
+                content: ' ';
+                display: block;
+                width: 100px;
+                height: 100px;
+                margin: calc(100% - 100px) auto auto auto;
+                border-radius: 50%;
+                border: 5px solid #27C469;
+                border-color: #27C469 transparent #27C469 transparent;
+                animation: lds-dual-ring 1.2s linear infinite;
+            }
+            @keyframes lds-dual-ring {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
+        <div id='ios-lds-dual-ring' class='lds-dual-ring'></div>
+    </body>
+</html>
