@@ -316,7 +316,7 @@ public class XenoViewFragment extends Fragment {
         execute("window._xenoSettings.key = \"" + Xeno.getInstance().getApiKey() + "\";");
         execute("window._xenoSettings.options = { native_sdk: true }");
         execute("window._xenoSettings.identify = function() { return " + Xeno.getIdentity().build() + " }");
-        execute("setTimeout(function() { var xenoLoaderScript = document.createElement('script'); xenoLoaderScript.src = 'https://xeno.app/chat_loader.js?t=" + Xeno.getInstance().getApiKey() + "'; document.head.appendChild(xenoLoaderScript); }, 5000)");
+        execute("var xenoLoaderScript = document.createElement('script'); xenoLoaderScript.src = 'https://cdn.xeno.app/chat_loader.js?t=" + Xeno.getInstance().getApiKey() + "'; document.head.appendChild(xenoLoaderScript);");
     }
 
     public static void execute(String script) {
