@@ -314,10 +314,9 @@ public class XenoViewFragment extends Fragment {
     public static void load() {
         execute("document.getElementById('android-lds-dual-ring').style.setProperty('color', '" + color + "');");
         execute("window._xenoSettings.key = \"" + Xeno.getInstance().getApiKey() + "\";");
-        execute("window._xenoSettings.chatfile = 'debug';");
         execute("window._xenoSettings.options = { native_sdk: true }");
         execute("window._xenoSettings.identify = function() { return " + Xeno.getIdentity().build() + " }");
-        execute("setTimeout(function() { var xenoLoaderScript = document.createElement('script'); xenoLoaderScript.src = 'https://xeno.eu.ngrok.io/chat_loader.js?t=87dagd6fd'; document.head.appendChild(xenoLoaderScript); }, 5000)");
+        execute("setTimeout(function() { var xenoLoaderScript = document.createElement('script'); xenoLoaderScript.src = 'https://xeno.app/chat_loader.js?t=" + Xeno.getInstance().getApiKey() + "'; document.head.appendChild(xenoLoaderScript); }, 5000)");
     }
 
     public static void execute(String script) {
