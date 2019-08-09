@@ -24,7 +24,7 @@ public class Xeno {
     private String secretKey;
     private String randomToken;
     private String locale;
-    private String color = "blue";
+    private String color = "#27c469";
     private Context context;
 
     private Xeno(Context context, String apiKey, String secretKey) {
