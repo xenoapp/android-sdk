@@ -155,7 +155,7 @@ public class XenoViewFragment extends Fragment {
             }
         });
 
-        mWebView.loadUrl("https://xeno.eu.ngrok.io/sdk-views/android.html");
+        mWebView.loadUrl("https://xeno.app/sdk-views/android.html");
 
         load();
         return rootView;
@@ -316,7 +316,7 @@ public class XenoViewFragment extends Fragment {
         execute("window._xenoSettings.key = \"" + Xeno.getInstance().getApiKey() + "\";");
         execute("window._xenoSettings.chatfile = 'debug';");
         execute("window._xenoSettings.options = { native_sdk: true }");
-        execute("window._xenoSettings.identify = function() { return " + Xeno.getInstance().getIdentity().build() + " }");
+        execute("window._xenoSettings.identify = function() { return " + Xeno.getIdentity().build() + " }");
         execute("setTimeout(function() { var xenoLoaderScript = document.createElement('script'); xenoLoaderScript.src = 'https://xeno.eu.ngrok.io/chat_loader.js?t=87dagd6fd'; document.head.appendChild(xenoLoaderScript); }, 5000)");
     }
 

@@ -31,7 +31,7 @@ public class Xeno {
         this.context = context;
         getOrCreateRandomToken();
         this.identity = new XenoIdentity();
-        this.identity.setId(randomToken,secretKey);
+        this.identity.setId(randomToken, secretKey);
         this.identified = false;
         this.apiKey = apiKey;
         this.secretKey = secretKey;
@@ -120,8 +120,8 @@ public class Xeno {
         return context;
     }
 
-    public XenoIdentity getIdentity() {
-        return identity;
+    public static XenoIdentity getIdentity() {
+        return getInstance().identity;
     }
 
     public static void setIdentity(XenoIdentity identity) {

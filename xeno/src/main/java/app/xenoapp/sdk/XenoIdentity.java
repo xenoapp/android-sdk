@@ -48,6 +48,14 @@ public class XenoIdentity {
         return setCustomAttribute("email", email);
     }
 
+    public XenoIdentity setAvatar(String avatar) {
+        return setCustomAttribute("avatar", avatar);
+    }
+
+    public XenoIdentity setRegisteredAt(String registeredAt) {
+        return setCustomAttribute("registered_at", registeredAt);
+    }
+
     public XenoIdentity setCustomAttribute(String key, String value) {
         this.attributes.put(key, value);
         return this;
