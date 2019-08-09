@@ -155,7 +155,7 @@ public class XenoViewFragment extends Fragment {
             }
         });
 
-        mWebView.loadUrl("https://xeno.app/sdk-views/android.html");
+        mWebView.loadUrl("https://cdn.xeno.app/sdk-views/android.html");
 
         load();
         return rootView;
