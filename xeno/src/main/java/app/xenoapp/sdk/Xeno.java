@@ -4,14 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Base64;
 import android.util.Log;
 
 import java.util.UUID;
-
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-
 import app.xenoapp.sdk.ui.XenoActivity;
 
 public class Xeno {
@@ -21,36 +16,53 @@ public class Xeno {
     private XenoIdentity identity;
     private Boolean identified;
     private String apiKey;
-    private String secretKey;
     private String randomToken;
     private String locale;
     private String color = "#27c469";
     private Context context;
 
-    private Xeno(Context context, String apiKey, String secretKey) {
+    private Xeno(Context context, String apiKey) {
         this.context = context;
         getOrCreateRandomToken();
         this.identity = new XenoIdentity();
-        this.identity.setId(randomToken, secretKey);
+        this.identity.setId(randomToken);
         this.identified = false;
         this.apiKey = apiKey;
-        this.secretKey = secretKey;
     }
 
-    private Xeno(Context context, String apiKey, XenoIdentity identity, String secretKey) {
+    //    DEPRECATED
+    private Xeno(Context context, String apiKey, String secretKey) {
+        Log.e(packageName, "The secretKey argument is deprecated. Please see https://xenoapp.help/hc/developers-documentation/android-sdk/automatically-identify-your-users-on-your-android-apps");
+    }
+
+    private Xeno(Context context, String apiKey, XenoIdentity identity) {
         this.context = context;
         this.apiKey = apiKey;
-        this.secretKey = secretKey;
         this.identity = identity;
         this.identified = true;
     }
 
-    public static void initialize(Context context, String apiKey, String secretKey) {
-        instance = new Xeno(context, apiKey, secretKey);
+    //    DEPRECATED
+    private Xeno(Context context, String apiKey, XenoIdentity identity, String secretKey) {
+        Log.e(packageName, "The secretKey argument is deprecated. Please see https://xenoapp.help/hc/developers-documentation/android-sdk/automatically-identify-your-users-on-your-android-apps");
     }
 
+    public static void initialize(Context context, String apiKey) {
+        instance = new Xeno(context, apiKey);
+    }
+
+    //    DEPRECATED
+    public static void initialize(Context context, String apiKey, String secretKey) {
+        Log.e(packageName, "The secretKey argument is deprecated. Please see https://xenoapp.help/hc/developers-documentation/android-sdk/automatically-identify-your-users-on-your-android-apps");
+    }
+
+    public static void initialize(Context context, String apiKey, XenoIdentity identity) {
+        instance = new Xeno(context, apiKey, identity);
+    }
+
+    //    DEPRECATED
     public static void initialize(Context context, String apiKey, String secretKey, XenoIdentity identity) {
-        instance = new Xeno(context, apiKey, identity, secretKey);
+        Log.e(packageName, "The secretKey argument is deprecated. Please see https://xenoapp.help/hc/developers-documentation/android-sdk/automatically-identify-your-users-on-your-android-apps");
     }
 
 
@@ -94,10 +106,6 @@ public class Xeno {
 
     public String getApiKey() {
         return apiKey;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
     }
 
     public void setRandomToken(String tokenId) {
