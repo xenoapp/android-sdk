@@ -37,7 +37,7 @@ public class XenoViewFragment extends Fragment {
     private ValueCallback<Uri[]> mFilePathCallback;
     private String mCameraPhotoPath;
 
-    private static LinkedList<String> commandQueue = new LinkedList<String>();
+    private static LinkedList<String> commandQueue = new LinkedList<>();
 
     public static boolean isLoaded = false;
 
@@ -68,6 +68,7 @@ public class XenoViewFragment extends Fragment {
                 flushQueue();
             }
 
+            // android.os.Build.VERSION <= 22 (LOLLIPOP)
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (url.startsWith("mailto")) {
@@ -75,15 +76,23 @@ public class XenoViewFragment extends Fragment {
                     return true;
                 }
 
+                if (url.startsWith("tel:")) {
+                    handleTelToLink(url);
+                    return true;
+                }
+
+                if (url.startsWith("xeno:")) {
+                    handleXenoToLink(url);
+                    return true;
+                }
+
                 return false;
             }
 
+            // android.os.Build.VERSION > 22+ (MARSHMALLOW and latests)
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                String url = "";
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    url = request.getUrl().toString();
-                }
+                String url = request.getUrl().toString();
 
                 if (url.startsWith("mailto")) {
                     handleMailToLink(url);
